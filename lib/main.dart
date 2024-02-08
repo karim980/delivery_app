@@ -2,6 +2,7 @@ import 'package:delivery_app/core/app_theme.dart';
 import 'package:delivery_app/src/controller/auth_controller.dart';
 import 'package:delivery_app/src/controller/counter_controller.dart';
 import 'package:delivery_app/src/controller/menu_controller.dart';
+import 'package:delivery_app/src/controller/user_controller.dart';
 import 'package:delivery_app/src/veiw/auth/onboarding_screen.dart';
 import 'package:delivery_app/src/veiw/home_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -28,9 +29,11 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       theme: appTheme,
+      debugShowCheckedModeBanner: false,
       initialBinding: BindingsBuilder(() {
        Get.put<MenuPizzaController>(MenuPizzaController());
        Get.put<CounterController>(CounterController());
+       Get.put<UserController>(UserController());
       }),
       home: GetX<AuthController>(
         init: _authController,

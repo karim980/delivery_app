@@ -42,10 +42,7 @@ class LoginView extends StatelessWidget {
                         _emailController.text,
                         _passwordController.text,
                       );
-
-                      if(sign == null){
-                        Get.offAll(HomeScreen());
-                      }
+                      Get.offAll(HomeScreen());
                     },
                     child: Row(mainAxisAlignment: MainAxisAlignment.center,
                       children: [

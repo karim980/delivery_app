@@ -1,3 +1,5 @@
+import 'package:delivery_app/src/controller/user_controller.dart';
+import 'package:delivery_app/src/veiw/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -7,7 +9,11 @@ import '../widgets/defult_text_form_feild.dart';
 
 class SignUpView extends StatelessWidget {
   final AuthController _authController = Get.find();
+  final UserController _userController = Get.find();
   final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _nameController = TextEditingController();
+  final TextEditingController _addressController = TextEditingController();
+  final TextEditingController _phoneController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
 
   @override
@@ -16,8 +22,7 @@ class SignUpView extends StatelessWidget {
       body: Center(
         child: SingleChildScrollView(
           child: Padding(
-            padding:
-            const EdgeInsets.symmetric(horizontal: 20.0, vertical: 50),
+            padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 50),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -25,6 +30,21 @@ class SignUpView extends StatelessWidget {
                   type: TextInputType.emailAddress,
                   controller: _emailController,
                   hintText: AppStrings.email,
+                ),
+                CustomTextFormField(
+                  type: TextInputType.name,
+                  controller: _nameController,
+                  hintText: 'Name',
+                ),
+                CustomTextFormField(
+                  type: TextInputType.streetAddress,
+                  controller: _addressController,
+                  hintText: 'Address',
+                ),
+                CustomTextFormField(
+                  type: TextInputType.phone,
+                  controller: _phoneController,
+                  hintText: 'Phone Number',
                 ),
                 CustomTextFormField(
                   controller: _passwordController,
@@ -42,8 +62,19 @@ class SignUpView extends StatelessWidget {
                     var signup = await _authController.signUp(
                         email: _emailController.text,
                         password: _passwordController.text);
+                    await _userController.addUser(
+                      name: _nameController.text,
+                      docId: signup,
+                      address: _addressController.text,
+                      phone: _phoneController.text,
+                    );
                     debugPrint(signup);
-                    Get.back();
+                    if(signup != null){
+                      Get.offAll(HomeScreen());
+                    }
+                    else{
+                      Get.showSnackbar(GetSnackBar());
+                    }
                   },
                   child: Text(AppStrings.signUpButton),
                 ),

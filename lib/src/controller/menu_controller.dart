@@ -3,6 +3,7 @@ import 'package:delivery_app/src/model/menu_model.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:get/get.dart';
 
+
 class MenuHelper {
   static Future<List<MenuModel>?> getData({required String path}) async {
     final ref = FirebaseDatabase.instance.ref();
@@ -20,12 +21,18 @@ class MenuHelper {
     required String name,
     required var price,
     required String number,
+    required String address,
+    required String userName,
+    required String phone,
   }) async {
     final DatabaseReference ref = FirebaseDatabase.instance.reference();
     await ref.child('orders').push().set({
       'name': name,
       'price': price,
       'number': number,
+      'userName': userName,
+      'phone': phone,
+      'address': address,
     });
     return null;
   }

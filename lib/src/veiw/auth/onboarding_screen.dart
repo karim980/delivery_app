@@ -47,24 +47,24 @@ class OnBoardingScreen extends StatelessWidget {
 
     return Scaffold(
       backgroundColor: AppColors.mainColor,
-      body: Padding(
-        padding: EdgeInsets.all(MediaQuery.of(context).size.width / 15),
-        child: Column(
-          children: [
-            Expanded(
-              child: PageView.builder(
-                controller: boardController,
-                itemBuilder: (context, index) => buildBoarding(boarding[index]),
-                itemCount: boarding.length,
-                physics: BouncingScrollPhysics(),
-                onPageChanged: (int index) {
-                  if(3 == index){
-                    Get.to(() => SignInUp());
-                  }
-                },
-              ),
+      body: Column(
+        children: [
+          Expanded(
+            child: PageView.builder(
+              controller: boardController,
+              itemBuilder: (context, index) => buildBoarding(boarding[index]),
+              itemCount: boarding.length,
+              physics: BouncingScrollPhysics(),
+              onPageChanged: (int index) {
+                if(3 == index){
+                  Get.to(() => SignInUp());
+                }
+              },
             ),
-            Row(
+          ),
+          Padding(
+            padding: const EdgeInsets.only(left: 20.0,bottom: 30),
+            child: Row(
               children: [
                 SmoothPageIndicator(
                   controller: boardController,
@@ -77,36 +77,39 @@ class OnBoardingScreen extends StatelessWidget {
                 Spacer(),
               ],
             ),
-            SizedBox(
-              height: MediaQuery.of(context).size.height / 20,
-            )
-          ],
-        ),
+          ),
+          SizedBox(
+            height: MediaQuery.of(context).size.height / 20,
+          )
+        ],
       ),
     );
   }
 
   Widget buildBoarding(OnBoardingAtr model,) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Image(image: AssetImage('${model.image}')),
-        SizedBox(
-            height: 30
-        ),
-        Text(
-          '${model.title}',
-          style: TextStyle(color: Colors.white),
-        ),
-        SizedBox(
-            height: 25
-        ),
-        Text(
-          '${model.body}',
-          style: TextStyle(color: Colors.white),
-        )
-      ],
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 20.0,horizontal: 25),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Image(image: AssetImage('${model.image}')),
+          SizedBox(
+              height: 30
+          ),
+          Text(
+            '${model.title}',
+            style: TextStyle(color: Colors.white),
+          ),
+          SizedBox(
+              height: 25
+          ),
+          Text(
+            '${model.body}',
+            style: TextStyle(color: Colors.white),
+          )
+        ],
+      ),
     );
   }
 }

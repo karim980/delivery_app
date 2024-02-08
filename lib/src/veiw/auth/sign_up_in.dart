@@ -15,11 +15,12 @@ class SignInUp extends StatelessWidget {
           children: [
             Image(image: AssetImage('assets/pngegg.png')),
             MaterialButton(
+              padding: EdgeInsets.symmetric(vertical: 10,horizontal: 45),
               color: AppColors.mainColor,
               onPressed: () {
                 Get.to( () => LoginView());
               },
-              child: Text('Sign In'),
+              child: Text('Sign In',style: TextStyle(color: Colors.white,fontSize: 24)),
             ),
             MaterialButton(
               onPressed: () {

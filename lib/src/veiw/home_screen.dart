@@ -3,6 +3,7 @@ import 'package:delivery_app/src/animatied_route.dart';
 import 'package:delivery_app/src/controller/menu_controller.dart';
 import 'package:delivery_app/src/model/menu_model.dart';
 import 'package:delivery_app/src/veiw/info_page.dart';
+import 'package:delivery_app/src/veiw/user_info_screen.dart';
 import 'package:delivery_app/src/veiw/widgets/search_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -17,12 +18,25 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+
         title: FoodSearchBar(
           onSearchTextChanged: (p0) {},
         ),
-        actions: [IconButton(onPressed: () {
-          authController.signOut();
-        }, icon: Icon(Icons.logout))],
+        actions: [
+          IconButton(
+              onPressed: () {
+                authController.signOut();
+              },
+              icon: Icon(Icons.logout)),
+          Padding(
+            padding: const EdgeInsets.only(right: 8.0),
+            child: IconButton(
+                onPressed: () {
+                  Get.to( () => UserInformation());
+                },
+                icon: Icon(Icons.account_circle)),
+          ),
+        ],
       ),
       body: SafeArea(
         child: Obx(
@@ -110,7 +124,9 @@ class HomeScreen extends StatelessWidget {
                                         children: [
                                           Text(
                                             menu.name,
-                                            style: TextStyle(fontSize: 23),maxLines: 2,overflow: TextOverflow.ellipsis,
+                                            style: TextStyle(fontSize: 23),
+                                            maxLines: 2,
+                                            overflow: TextOverflow.ellipsis,
                                           ),
                                           SizedBox(
                                             height: 5,
